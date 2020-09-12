@@ -20,6 +20,7 @@ class ProjectHelper:
         wd = self.app.wd
         wd.find_element_by_xpath("//button[text()='Создать новый проект']").click()
         self.fill_form(project)
+        sleep(2)
 
     def delete(self, project):
         wd = self.app.wd
