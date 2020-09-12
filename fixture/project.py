@@ -21,6 +21,12 @@ class ProjectHelper:
         wd.find_element_by_xpath("//button[text()='Создать новый проект']").click()
         self.fill_form(project)
 
+    def delete(self, project):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//a[text()='%s']" % project.name).click()
+        wd.find_element_by_xpath("//input[@value='Удалить проект']").click()
+        wd.find_element_by_xpath("//input[@value='Удалить проект']").click()
+
     def fill_form(self, project):
         wd = self.app.wd
         self.change_field("name", project.name)
