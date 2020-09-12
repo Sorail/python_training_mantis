@@ -5,6 +5,7 @@ import json
 import os.path
 
 from fixture.application import Application
+from fixture.db import DbFixture
 
 fixture = None
 target = None
@@ -29,6 +30,14 @@ def app(request):
         fixture = Application(browser=browser, base_url=web_address["baseUrl"])
     fixture.session.login(username=web_admin["username"], password=web_admin["password"])
     return fixture
+
+
+@pytest.fixture(scope="session")
+def db(request):
+    db_config = load_config(request.config.getoption("--target"))['db']
+    db = DbFixture(host=db_config['host'], name=db_config['name'],
+                          user=db_config['user'], password=db_config['password'])
+    return db
 
 
 @pytest.fixture(scope="session", autouse=True)

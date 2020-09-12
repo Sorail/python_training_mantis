@@ -1,7 +1,7 @@
 #  __author__ = 'Alexey Buchkin'
 
-from model.project import Project
 from selenium.webdriver.support.ui import Select
+from time import sleep
 
 
 class ProjectHelper:
@@ -34,17 +34,18 @@ class ProjectHelper:
         wd = self.app.wd
         if text is not None:
             if "status" in field_name:
-                wd.find_element_by_name(field_name).click()
+                wd.find_element_by_xpath("//select[@name='%s']" % field_name).click()
                 Select(wd.find_element_by_name(field_name)).select_by_visible_text("%s" % text)
-                wd.find_element_by_xpath("(//select[@name='%s']/option[@value='%s'])" % (field_name, text)).click()
+                wd.find_element_by_xpath("//select[@name='%s']//option[text()='%s']" % (field_name, text)).click()
             elif "inherit_global" in field_name:
-                status = wd.find_element_by_xpath("//input[@name='inherit_global']")
-                if str(status.getAttribute("checked")) != text:
-                    wd.find_element_by_xpath("//input[@name='inherit_global']").click()
+                status = wd.find_element_by_xpath("//input[@name='inherit_global']").get_attribute("checked")
+                pram = str(text).lower()
+                if status != pram:
+                    wd.find_element_by_xpath("//input[@name='inherit_global']/..").click()
             elif "view_state" in field_name:
                 wd.find_element_by_name(field_name).click()
                 Select(wd.find_element_by_name(field_name)).select_by_visible_text("%s" % text)
-                wd.find_element_by_xpath("(//select[@name='%s']/option[@value='%s'])" % (field_name, text)).click()
+                wd.find_element_by_xpath("//select[@name='%s']//option[text()='%s']" % (field_name, text)).click()
             else:
                 wd.find_element_by_name(field_name).click()
                 wd.find_element_by_name(field_name).clear()
