@@ -1,4 +1,5 @@
 import re
+import quopri
 
 
 class SignupHelper:
@@ -34,10 +35,5 @@ class SignupHelper:
         wd.find_element_by_xpath("//button[@type='submit']").click()
 
     def extract_confirmation_url(self, text):
-        index1 = text.index("http://")
-        b = text[index1:]
-        index2 = b.index("If you did not")
-        s = b[0:index2-2]
-        m = s.replace('3D', '')
-        k = m.replace('=\n', '')
-        return k
+        body = quopri.decodestring(text).decode('utf-8')
+        return re.search("http://.*", body).group(0)
