@@ -1,4 +1,5 @@
 #  __author__ = 'Alexey Buchkin'
+import time
 
 
 class SessionHelper:
@@ -32,15 +33,16 @@ class SessionHelper:
         wd = self.app.wd
         # logout
         wd.find_element_by_xpath("//span[@class='user-info']").click()
-        wd.find_element_by_xpath("//*[text()=' Logout']").click()
+        wd.find_element_by_xpath("//a[text()=' Logout']").click()
         wd.find_element_by_name("username")
 
     def ensure_logout(self):
         wd = self.app.wd
         # logout
         if self.is_logged_in():
+            time.sleep(1)
             wd.find_element_by_xpath("//span[@class='user-info']").click()
-            wd.find_element_by_xpath("//*[text()=' Logout']").click()
+            wd.find_element_by_xpath("//a[text()=' Logout']").click()
             wd.find_element_by_name("username")
 
     def is_logged_in(self):
