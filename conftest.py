@@ -68,8 +68,7 @@ def restore_server_configuration(host, username, password):
         if remote.path.isfile("config_defaults_inc.bak"):
             if remote.path.isfile("config_defaults_inc.php"):
                 remote.remove("config_defaults_inc.php")
-            if remote.path.isfile("config_defaults_inc.php"):
-                remote.rename("config_defaults_inc.bak", "config_defaults_inc.php")
+            remote.rename("config_defaults_inc.bak", "config_defaults_inc.php")
 
 
 @pytest.fixture(scope="session", autouse=True)
