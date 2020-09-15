@@ -37,17 +37,17 @@ class DbFixture:
 
     def modification_status(self, text):
         unit_to_multiplier = {
-            '10': 'в разработке',
-            '30': 'выпущен',
-            '50': 'стабильный',
-            '70': 'устарел'
+            '10': 'development',
+            '30': 'release',
+            '50': 'stable',
+            '70': 'obsolete'
         }
         return unit_to_multiplier[str(text)]
 
     def modification_view_state(self, text):
         unit_to_multiplier = {
-            '10': 'публичный',
-            '50': 'приватный'
+            '10': 'public',
+            '50': 'private'
         }
         return unit_to_multiplier[str(text)]
 

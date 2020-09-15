@@ -31,7 +31,8 @@ class SessionHelper:
     def logout(self):
         wd = self.app.wd
         # logout
-        wd.find_element_by_link_text(" Выход").click()
+        wd.find_element_by_xpath("//span[@class='user-info']").click()
+        wd.find_element_by_xpath("//*[text()=' Logout']").click()
         wd.find_element_by_name("username")
 
     def ensure_logout(self):
@@ -39,13 +40,12 @@ class SessionHelper:
         # logout
         if self.is_logged_in():
             wd.find_element_by_xpath("//span[@class='user-info']").click()
-            wd.find_element_by_link_text(" Выход").click()
+            wd.find_element_by_xpath("//*[text()=' Logout']").click()
             wd.find_element_by_name("username")
 
     def is_logged_in(self):
         wd = self.app.wd
-        wd.find_element_by_xpath("//span[@class='user-info']").click()
-        return len(wd.find_elements_by_link_text(" Выход")) > 0
+        return len(wd.find_elements_by_xpath("//span[@class='user-info']")) > 0
 
     def is_logged_in_as(self, username):
         return self.get_logged_user() == username

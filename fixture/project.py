@@ -13,20 +13,20 @@ class ProjectHelper:
 
     def open_project_page(self):
         wd = self.app.wd
-        wd.find_element_by_xpath("//span[text()=' Управление ']").click()
-        wd.find_element_by_xpath("//a[text()='Управление проектами']").click()
+        wd.find_element_by_xpath("//span[text()=' Manage ']").click()
+        wd.find_element_by_xpath("//a[text()='Manage Projects']").click()
 
     def create(self, project):
         wd = self.app.wd
-        wd.find_element_by_xpath("//button[text()='Создать новый проект']").click()
+        wd.find_element_by_xpath("//button[text()='Create New Project']").click()
         self.fill_form(project)
         sleep(2)
 
     def delete(self, project):
         wd = self.app.wd
         wd.find_element_by_xpath("//a[text()='%s']" % project.name).click()
-        wd.find_element_by_xpath("//input[@value='Удалить проект']").click()
-        wd.find_element_by_xpath("//input[@value='Удалить проект']").click()
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
 
     def fill_form(self, project):
         wd = self.app.wd
@@ -35,7 +35,7 @@ class ProjectHelper:
         self.change_field("inherit_global", project.inherit_global)
         self.change_field("view_state", project.view_state)
         self.change_field("description", project.description)
-        wd.find_element_by_xpath("//input[@value='Добавить проект']").click()
+        wd.find_element_by_xpath("//input[@value='Add Project']").click()
 
     def change_field(self, field_name, text):
         wd = self.app.wd

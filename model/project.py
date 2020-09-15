@@ -5,8 +5,8 @@ from sys import maxsize
 
 class Project:
 
-    def __init__(self, id=None, name=None, status='в разработке',
-                 inherit_global=True, view_state='публичный', description=None):
+    def __init__(self, id=None, name=None, status='development',
+                 inherit_global=True, view_state='public', description=None):
         self.id = id
         self.name = name
         self.status = status
